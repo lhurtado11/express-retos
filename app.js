@@ -41,9 +41,9 @@ app.get('/', (req, res) => {
     let $tagCode = '';
     for (let i = 0; i<numbers.length; i++){
         if(numbers[i]%2 === 0)
-            {$tagCode += `<p>${numbers[i]} Soy par!</p>`; }
+            {$tagCode += `<p>${numbers[i]} Soy Par!</p>`; }
         else 
-            {$tagCode += `<p>${numbers[i]} Soy impar!</p>`;} 
+            {$tagCode += `<p>${numbers[i]} Soy Impar!</p>`;} 
     }
     res.send($tagCode)
 })
