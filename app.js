@@ -28,7 +28,7 @@ app.get('/makers/:name', (req, res) => {
     res.send(`<h1>Hola ${name.replace(/^\w/, (c) => c.toUpperCase())}!</h1>`)
 })
 app.listen(3000, () => console.log('Listening on port 3000!'))
-*/
+
 // reto: pares e impares
 const express = require('express')
 const app = express()
@@ -47,3 +47,23 @@ app.get('/', (req, res) => {
     res.send($tagCode)
 })
 app.listen(3000, () => console.log('Listening on port 3000!'))
+*/
+
+// RETO SALUDAME 3
+const express = require('express');
+const app = express();
+
+app.set ('view engine', 'pug');
+app.set ('views', 'views');
+
+app.use(express.urlencoded());
+
+app.get('/', (req, res) => {
+    res.render('index');
+})
+
+app.post('/', (req, res) => {
+    res.send(`<h1> Hola ${req.body.name}!</h1>`);
+})
+
+app.listen(3000, () => console.log('Listening on port 3000!'));
