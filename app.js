@@ -56,14 +56,14 @@ const app = express();
 app.set ('view engine', 'pug');
 app.set ('views', 'views');
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.render('index');
+        res.send(req.header('user-agent'));
 })
 
-app.post('/', (req, res) => {
-    res.send(`<h1> Hola ${req.body.name}! </h1>`);
-})
+// app.post('/', (req, res) => {
+//     res.send(`<h1> Hola ${req.body.name}! </h1>`);
+// })
 
 app.listen(3000, () => console.log('Listening on port 3000!'));
