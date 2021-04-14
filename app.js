@@ -50,20 +50,63 @@ app.listen(3000, () => console.log('Listening on port 3000!'))
 */
 
 // RETO SALUDAME 3
-const express = require('express');
-const app = express();
+// const express = require('express');
+// const app = express();
 
-app.set ('view engine', 'pug');
-app.set ('views', 'views');
+// app.set ('view engine', 'pug');
+// app.set ('views', 'views');
 
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-        res.send(req.header('user-agent'));
-})
-
-// app.post('/', (req, res) => {
-//     res.send(`<h1> Hola ${req.body.name}! </h1>`);
+// app.get('/', (req, res) => {
+//         res.render('index');
 // })
 
+//  app.post('/', (req, res) => {
+//     res.send(`<h1> Hola ${req.body.name}! </h1>`);
+//  })
+
+// app.listen(3000, () => console.log('Listening on port 3000!'));
+
+
+// // reto encabezados
+// const express = require('express');
+// const app = express();
+// app.set ('view engine', 'pug');
+// app.set ('views', 'views');
+
+// app.use(express.urlencoded({ extended: true }));
+
+// app.get('/', (req, res) => {
+//         res.send(req.header('user-agent'));
+// })
+
+// app.listen(3000, () => console.log('Listening on port 3000!'));
+// reto visitantes 
+
+// requiriendo librerias
+const express = require('express');
+const mongoose = require('mongoose');
+
+const app = express();
+// conexión con mongodb localmente y enlace al envento error
+mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true , useUnifiedTopology: true });
+mongoose.connection.on("error", function(e) {console.log(e); });
+// definimos el esquema
+const schema = mongoose.Schema({
+    name: String,
+    date:{type: Date, default: Date.now}
+});
+// creación del modelo
+const User = mongoose.model("User", schema);
+
+app.get('/', (req, res) => {
+    const name = req.query.name || 'Anónimo';
+    // creando un documento
+    const first = new User({ name: `${name}` });
+    first.save(function(err) {
+        if (err) return console.log(err);
+    });
+    res.send(`<h1>El visitante fue almacenado con éxito</h1>`);
+});
 app.listen(3000, () => console.log('Listening on port 3000!'));
