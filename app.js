@@ -90,7 +90,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 // conexión con mongodb localmente y enlace al envento error
-mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true , useUnifiedTopology: true });
+mongoose.connect( process.env.MONGODB_URL || 'mongodb://localhost:27017/mongo-1', { useNewUrlParser: true , useUnifiedTopology: true });
 mongoose.connection.on("error", function(e) {console.log(e); });
 // definimos el esquema
 const schema = mongoose.Schema({
