@@ -98,12 +98,12 @@ const schema = mongoose.Schema({
     date:{type: Date, default: Date.now}
 });
 // creación del modelo
-const User = mongoose.model("User", schema);
+const Visitor = mongoose.model("Visitor", schema);
 
 app.get('/', (req, res) => {
     const name = req.query.name || 'Anónimo';
     // creando un documento
-    const first = new User({ name: `${name}` });
+    const first = new Visitor({ name: `${name}` });
     first.save(function(err) {
         if (err) return console.log(err);
     });
